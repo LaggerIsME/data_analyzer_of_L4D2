@@ -9,9 +9,11 @@ df = pd.read_csv('l4d2_player_stats_final.csv')
 def main():
     pie_chart()
 
+
 def percent(h_n, h_all):
     result = 100 * float(h_n) / float(h_all)
     return result
+
 
 def pie_chart():
     # Датафрейм[Вытащить ряды, где часов меньше 100], посчитать все колонны, вытащить колонну с часами игры
@@ -37,23 +39,27 @@ def pie_chart():
     explode = (0.1, 0, 0, 0)
 
     # Сама диаграмма
-    plt.pie(sizes, labels=labels, explode = explode)
+    plt.pie(sizes, labels=labels, explode=explode)
 
     # Таблица с уточнениями, что какой цвет означает
     plt.legend(loc="lower left", bbox_to_anchor=(-0.35, -0.1))
     plt.show()
 
+
 def bar_chart():
-    #Какое самое популярное оружие рукопашного боя в L4D2
+    # Какое самое популярное оружие рукопашного боя в L4D2
     print("bar chart")
 
+
 def scatter_plot():
-    #Количество огня по своим при повышении сложности
+    # Количество огня по своим при повышении сложности
     print('scatter plot')
 
+
 def heat_map():
-    #Как изменяется количество убийств оружием ближнего боя при повышении сложности
+    # Как изменяется количество убийств оружием ближнего боя при повышении сложности
     print('heat map')
+
+
 if __name__ == '__main__':
     main()
-
