@@ -8,8 +8,8 @@ df = pd.read_csv('l4d2_player_stats_final.csv')
 # matplotlib для визуализации отфильтрованных данныхa
 def main():
     pie_chart()
-
-
+    bar_chart()
+    scatter_plot()
 def percent(h_n, h_all):
     result = 100 * float(h_n) / float(h_all)
     return result
@@ -37,12 +37,13 @@ def pie_chart():
     labels = ['до 100 часов игры', 'до 200 часов игры', 'до 500 часов игры', 'от 500 часов игры']
     sizes = [p1, p2, p3, p4]
     explode = (0.1, 0, 0, 0)
-
+    fig, ax = plt.subplots(figsize=(16, 9))
     # Сама диаграмма
-    plt.pie(sizes, labels=labels, explode=explode)
+    ax.pie(sizes, labels=labels, explode=explode, textprops={'fontsize': 20})
 
     # Таблица с уточнениями, что какой цвет означает
-    plt.legend(loc="lower left", bbox_to_anchor=(-0.35, -0.1))
+    ax.legend(loc="lower left", bbox_to_anchor=(-0.35, -0.1), fontsize=20)
+    plt.title('Количество сыгранных часов среди игроков', fontdict={'fontsize': 30}, fontweight = 'bold')
     plt.show()
 
 
@@ -79,16 +80,16 @@ def bar_chart():
                           shovel_users, knife_users]
 
     # Создание графика
-    fig = plt.figure(figsize=(16, 9))
+    fig, ax = plt.subplots(figsize =(16, 9))
     # Сетка по x
-    plt.grid(color='black', axis='x')
+    ax.grid(color='grey', axis='x', linestyle = '--')
     # Сам график
-    plt.barh(weapon_names[11:14], melee_weapon_users[11:14], color="green", edgecolor='black')
-    plt.barh(weapon_names[0], melee_weapon_users[0], color="blue", edgecolor='black')
-    plt.barh(weapon_names[2:5], melee_weapon_users[2:5], color="blue", edgecolor='black')
-    plt.barh(weapon_names[6], melee_weapon_users[6], color="blue", edgecolor='black')
-    plt.barh(weapon_names[8:11], melee_weapon_users[8:11], color="blue", edgecolor='black')
-    plt.barh([weapon_names[1], weapon_names[5], weapon_names[7]],
+    ax.barh(weapon_names[11:14], melee_weapon_users[11:14], color="green", edgecolor='black')
+    ax.barh(weapon_names[0], melee_weapon_users[0], color="blue", edgecolor='black')
+    ax.barh(weapon_names[2:5], melee_weapon_users[2:5], color="blue", edgecolor='black')
+    ax.barh(weapon_names[6], melee_weapon_users[6], color="blue", edgecolor='black')
+    ax.barh(weapon_names[8:11], melee_weapon_users[8:11], color="blue", edgecolor='black')
+    ax.barh([weapon_names[1], weapon_names[5], weapon_names[7]],
              [melee_weapon_users[1], melee_weapon_users[5], melee_weapon_users[7]],
              color='red', edgecolor='black')
 
@@ -96,14 +97,27 @@ def bar_chart():
     plt.xlabel('Количество использовавших данное оружие', fontweight='bold', fontsize=20)
     plt.ylabel('Название оружия ближнего боя', fontweight='bold', fontsize=20)
     # аннотации
-    for melee in melee_weapon_users:
-        plt.bar_label(melee)
+    for i in ax.patches:
+        plt.text(i.get_width() + 30, i.get_y() + 0.3, str(round((i.get_width()), 2)), fontsize=10, fontweight='bold',
+                 color='black')
     plt.show()
 
 
 def scatter_plot():
-    # Количество огня по своим при повышении сложности
-    print('scatter plot')
+    fig, ax = plt.subplots(figsize=(16, 9))
+    x1 = df['Pistol_Kills']/1000
+    y1 = df['Pistol_Shots']/1000
+    x2 = df['Magnum_Kills']/1000
+    y2 = df['Magnum_Shots']/1000
+    ax.scatter(x1, y1, edgecolor ="black")
+    ax.scatter(x2, y2, edgecolor ="red")
+    ax.grid(color='grey', linestyle = '--')
+    plt.xlabel('Убийства(к)', fontsize=20)
+    plt.ylabel('Выстрелы(к)', fontsize=20)
+    plt.title('Соотношение убийств c пистолета на количество выстрелов', fontdict={'fontsize': 30}, fontweight='bold')
+    ax.legend(('Пистолеты', 'Револьверы'), loc='lower right', fontsize=15)
+    plt.show()
+
 
 
 def heat_map():
