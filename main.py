@@ -43,7 +43,7 @@ def pie_chart():
 
     # Таблица с уточнениями, что какой цвет означает
     ax.legend(loc="lower left", bbox_to_anchor=(-0.35, -0.1), fontsize=20)
-    plt.title('Количество сыгранных часов среди игроков', fontdict={'fontsize': 30}, fontweight = 'bold')
+    plt.title('Сколько часов люди играют в L4D2', fontdict={'fontsize': 30}, fontweight = 'bold')
     plt.show()
 
 
@@ -100,6 +100,7 @@ def bar_chart():
     for i in ax.patches:
         plt.text(i.get_width() + 30, i.get_y() + 0.3, str(round((i.get_width()), 2)), fontsize=10, fontweight='bold',
                  color='black')
+    plt.title('Самые популярные оружия ближнего боя', fontdict={'fontsize': 30}, fontweight='bold')
     plt.show()
 
 
