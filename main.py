@@ -90,6 +90,7 @@ def bar_chart():
     plt.barh([weapon_names[1], weapon_names[5], weapon_names[7]],
              [melee_weapon_users[1], melee_weapon_users[5], melee_weapon_users[7]],
              color='red', edgecolor='black')
+
     # Настройки обозначений по осям
     plt.xlabel('Количество использовавших данное оружие', fontweight='bold', fontsize=20)
     plt.ylabel('Название оружия ближнего боя', fontweight='bold', fontsize=20)
